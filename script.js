@@ -25,13 +25,30 @@ function updatePlayIcon () {
 
 // Update progree and timesamp 
 function updateProgress() {
-    return true;
+    progress.value = (video.currentTime/ video.duration)* 100;
+
+    // console.log(video.currentTime);
+    // console.log(video.duration);
+
+    // get minutes 
+    let mins = Math.floor(video.currentTime/ 60);
+    if (mins < 10){
+        mins = '0' + String(mins);
+    }
+
+    // get seconds 
+    let secs = Math.floor(video.currentTime % 60);
+    if (secs < 10){
+        secs = '0' + String(secs);
+    }
+
+    timestamp.innerHTML = `${mins}:${secs}`
 }
 
 // set video time to progress
-// fuction setVideoProgress() {
-//     return true;
-// }
+function setVideoProgress() {
+    video.currentTime = (progress.value * video.duration)/ 100;
+}
 
 // Stop Vide0
 function stopVideo() {
@@ -50,4 +67,4 @@ play.addEventListener('click', toggleVideoStatus);
 
 stop.addEventListener('click', stopVideo);
 
-// progress.addEventListener('change', setVideoProgress);
+progress.addEventListener('change', setVideoProgress);
